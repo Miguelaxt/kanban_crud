@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 20px;
+  background: #f8f9fb;
+  color: #222;
+}
+.container {
+  text-align: center;
+}
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+nav a {
+  margin-right:12px;
+  text-decoration:none;
+  color:#1a73e8;
+}
+form label { display:block; margin-top:8px; }
+input[type="text"], input[type="email"], select, textarea {
+  width:100%;
+  padding:8px;
+  margin-top:4px;
+  box-sizing:border-box;
+}
+button {
+  margin-top:10px;
+  padding:8px 12px;
+  cursor:pointer;
+  border:none;
+  border-radius:4px;
+  background:#1a73e8;
+  color:white;
+}
+.msg { margin:10px 0; padding:8px; border-radius:4px; }
+.msg.success { background:#d4edda; color:#155724; }
+.msg.error { background:#f8d7da; color:#721c24; }
+
+.kanban {
+  display:flex;
+  gap:16px;
+  justify-content:space-between;
+  margin-top:16px;
+}
+.column {
+  background:#ffffff;
+  border-radius:8px;
+  padding:12px;
+  width:32%;
+  min-height:300px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+.card {
+  background:#fff;
+  border:1px solid #ececec;
+  padding:10px;
+  border-radius:6px;
+  margin-bottom:10px;
+}
+.card .meta { font-size:13px; color:#555; margin-top:6px; }
+.card-actions { margin-top:8px; display:flex; gap:8px; align-items:center; }
+.small { font-size:13px; padding:6px 8px; border-radius:4px; }
+.btn-danger { background:#dc3545; }
+.btn-edit { background:#17a2b8; }
+select.small { padding:4px 6px; }
+
+.menu {
+  text-align: center;
+}
