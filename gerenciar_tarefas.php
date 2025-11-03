@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
 require 'db.php';
 
 $msg = "";
@@ -40,16 +46,23 @@ if (isset($_GET['msg'])) {
     if ($_GET['msg'] === 'deleted') { $msg = "Tarefa excluída."; $msgType = "success"; }
 }
 
-$tarefas = $pdo->query("
+$user_id = $_SESSION['user_id'];
+
+$tarefas = $pdo->prepare("
     SELECT t.*, u.nome AS usuario_nome
     FROM tarefas t
     JOIN usuarios u ON t.usuario_id = u.id
+    WHERE t.usuario_id = ?
     ORDER BY t.data_cadastro ASC
-")->fetchAll();
+");
+$tarefas->execute([$user_id]);
+$tasks = $tarefas->fetchAll();
 
 $kanban = ['A Fazer'=>[], 'Fazendo'=>[], 'Pronto'=>[]];
-foreach ($tarefas as $t) {
-    $kanban[$t['status']][] = $t;
+foreach ($tasks as $t) {
+    $s = $t['status'] ?? 'A Fazer';
+    if (!isset($kanban[$s])) $s = 'A Fazer';
+    $kanban[$s][] = $t;
 }
 ?>
 <!DOCTYPE html>
@@ -62,7 +75,7 @@ foreach ($tarefas as $t) {
 <body>
   <div class="container">
     <header>
-      <h2>Gerenciamento de Tarefas (Kanban)</h2>
+      <h2>Gerenciamento de Tarefas</h2>
       <nav><a href="index.php">Menu</a> | <a href="cadastro_tarefa.php">Nova Tarefa</a> | <a href="cadastro_usuario.php">Novo Usuário</a></nav>
     </header>
 
@@ -91,6 +104,7 @@ foreach ($tarefas as $t) {
                 <form method="post" style="display:inline;">
                   <input type="hidden" name="action" value="update_inline">
                   <input type="hidden" name="id" value="<?php echo $c['id']; ?>">
+
                   <label>Status</label>
                   <select name="status" class="small">
                     <option value="A Fazer" <?php echo ($c['status']=='A Fazer')?'selected':''; ?>>A Fazer</option>

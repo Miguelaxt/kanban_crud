@@ -4,31 +4,31 @@ require 'db.php';
 $msg = "";
 $msgType = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = trim($_POST['nome'] ?? "");
-    $email = trim($_POST['email'] ?? "");
+$nome = $_POST['nome'] ?? "";
+$email = $_POST['email'] ?? "";
+$senha = $_POST['senha'] ?? "";
 
-    if ($nome === "" || $email === "") {
-        $msg = "Todos os campos são obrigatórios.";
-        $msgType = "error";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $msg = "E-mail inválido.";
+if ($nome === "" || $email === "" || $senha === "") {
+    $msg = "Todos os campos são obrigatórios.";
+    $msgType = "error";
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $msg = "E-mail inválido.";
+    $msgType = "error";
+} else {
+    $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch()) {
+        $msg = "E-mail já cadastrado.";
         $msgType = "error";
     } else {
-        $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
-        $stmt->execute([$email]);
-        if ($stmt->fetch()) {
-            $msg = "E-mail já cadastrado.";
-            $msgType = "error";
+        $hash = password_hash($senha, PASSWORD_DEFAULT);
+        $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
+        if ($stmt->execute([$nome, $email, $hash])) {
+            header("Location: cadastro_usuario.php?msg=ok");
+            exit;
         } else {
-            $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email) VALUES (?, ?)");
-            if ($stmt->execute([$nome, $email])) {
-                header("Location: cadastro_usuario.php?msg=ok");
-                exit;
-            } else {
-                $msg = "Erro ao cadastrar.";
-                $msgType = "error";
-            }
+            $msg = "Erro ao cadastrar.";
+            $msgType = "error";
         }
     }
 }
@@ -63,6 +63,8 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'ok') {
       <label>E-mail</label>
       <input type="email" name="email" required>
 
+      <label>Senha</label>
+      <input type="password" name="senha" required>
       <button type="submit">Cadastrar</button>
     </form>
   </div>
