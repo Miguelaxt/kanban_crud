@@ -31,6 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit">Entrar</button>
 </form>
 
-<?php if($msg): ?>
+<?php if ($msg): ?>
     <p><?= htmlspecialchars($msg) ?></p>
 <?php endif; ?>

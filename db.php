@@ -2,7 +2,7 @@
 $host = "localhost";
 $db   = "kanban_db";
 $user = "root";
-$pass = "root"; 
+$pass = "root";
 $charset = "utf8mb4";
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
@@ -15,4 +15,3 @@ try {
 } catch (PDOException $e) {
     die("Erro de conexão: " . $e->getMessage());
 }
-?>

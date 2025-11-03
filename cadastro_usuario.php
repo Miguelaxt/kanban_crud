@@ -40,33 +40,36 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'ok') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="utf-8">
-  <title>Cadastro de Usuários</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title>Cadastro de Usuários</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h2>Cadastro de Usuários</h2>
-      <nav><a href="index.php">Voltar ao Menu</a></nav>
-    </header>
+    <div class="container">
+        <header>
+            <h2>Cadastro de Usuários</h2>
+            <nav><a href="index.php">Voltar ao Menu</a></nav>
+        </header>
 
-    <?php if($msg): ?>
-      <div class="msg <?php echo $msgType==='success'?'success':'error'; ?>"><?php echo htmlspecialchars($msg); ?></div>
-    <?php endif; ?>
+        <?php if ($msg): ?>
+            <div class="msg <?php echo $msgType === 'success' ? 'success' : 'error'; ?>"><?php echo htmlspecialchars($msg); ?></div>
+        <?php endif; ?>
 
-    <form method="post" action="cadastro_usuario.php" novalidate>
-      <label>Nome</label>
-      <input type="text" name="nome" required>
+        <form method="post" action="cadastro_usuario.php" novalidate>
+            <label>Nome</label>
+            <input type="text" name="nome" required>
 
-      <label>E-mail</label>
-      <input type="email" name="email" required>
+            <label>E-mail</label>
+            <input type="email" name="email" required>
 
-      <label>Senha</label>
-      <input type="password" name="senha" required>
-      <button type="submit">Cadastrar</button>
-    </form>
-  </div>
+            <label>Senha</label>
+            <input type="password" name="senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
 </body>
+
 </html>

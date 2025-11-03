@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prioridade = $_POST['prioridade'] ?? "";
     $status = $_POST['status'] ?? "A Fazer";
 
-    if ($usuario_id === "" || $descricao === "" || $setor === "" || $prioridade === "" ) {
+    if ($usuario_id === "" || $descricao === "" || $setor === "" || $prioridade === "") {
         $msg = "Todos os campos são obrigatórios.";
         $msgType = "error";
     } else {
@@ -78,57 +78,60 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'ok') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="utf-8">
-  <title><?php echo $editMode?'Editar Tarefa':'Cadastro de Tarefas'; ?></title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title><?php echo $editMode ? 'Editar Tarefa' : 'Cadastro de Tarefas'; ?></title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h2><?php echo $editMode?'Editar Tarefa':'Cadastro de Tarefas'; ?></h2>
-      <nav><a href="index.php">Voltar ao Menu</a> | <a href="gerenciar_tarefas.php">Gerenciar Tarefas</a></nav>
-    </header>
+    <div class="container">
+        <header>
+            <h2><?php echo $editMode ? 'Editar Tarefa' : 'Cadastro de Tarefas'; ?></h2>
+            <nav><a href="index.php">Voltar ao Menu</a> | <a href="gerenciar_tarefas.php">Gerenciar Tarefas</a></nav>
+        </header>
 
-    <?php if($msg): ?>
-      <div class="msg <?php echo $msgType==='success'?'success':'error'; ?>"><?php echo htmlspecialchars($msg); ?></div>
-    <?php endif; ?>
+        <?php if ($msg): ?>
+            <div class="msg <?php echo $msgType === 'success' ? 'success' : 'error'; ?>"><?php echo htmlspecialchars($msg); ?></div>
+        <?php endif; ?>
 
-    <form method="post" action="cadastro_tarefa.php">
-      <input type="hidden" name="id" value="<?php echo htmlspecialchars($task['id']); ?>">
+        <form method="post" action="cadastro_tarefa.php">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($task['id']); ?>">
 
-      <label>Usuário</label>
-      <select name="usuario_id" required>
-        <option value="">Selecione</option>
-        <?php foreach($usuarios as $u): ?>
-          <option value="<?php echo $u['id']; ?>" <?php echo ($u['id']==$task['usuario_id'])?'selected':''; ?>>
-            <?php echo htmlspecialchars($u['nome']); ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
+            <label>Usuário</label>
+            <select name="usuario_id" required>
+                <option value="">Selecione</option>
+                <?php foreach ($usuarios as $u): ?>
+                    <option value="<?php echo $u['id']; ?>" <?php echo ($u['id'] == $task['usuario_id']) ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($u['nome']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
-      <label>Descrição</label>
-      <textarea name="descricao" rows="4" required><?php echo htmlspecialchars($task['descricao']); ?></textarea>
+            <label>Descrição</label>
+            <textarea name="descricao" rows="4" required><?php echo htmlspecialchars($task['descricao']); ?></textarea>
 
-      <label>Setor</label>
-      <input type="text" name="setor" value="<?php echo htmlspecialchars($task['setor']); ?>" required>
+            <label>Setor</label>
+            <input type="text" name="setor" value="<?php echo htmlspecialchars($task['setor']); ?>" required>
 
-      <label>Prioridade</label>
-      <select name="prioridade" required>
-        <option value="Baixa" <?php echo ($task['prioridade']=='Baixa')?'selected':''; ?>>Baixa</option>
-        <option value="Média" <?php echo ($task['prioridade']=='Média')?'selected':''; ?>>Média</option>
-        <option value="Alta" <?php echo ($task['prioridade']=='Alta')?'selected':''; ?>>Alta</option>
-      </select>
+            <label>Prioridade</label>
+            <select name="prioridade" required>
+                <option value="Baixa" <?php echo ($task['prioridade'] == 'Baixa') ? 'selected' : ''; ?>>Baixa</option>
+                <option value="Média" <?php echo ($task['prioridade'] == 'Média') ? 'selected' : ''; ?>>Média</option>
+                <option value="Alta" <?php echo ($task['prioridade'] == 'Alta') ? 'selected' : ''; ?>>Alta</option>
+            </select>
 
-      <label>Status</label>
-      <select name="status" required>
-        <option value="A Fazer" <?php echo ($task['status']=='A Fazer')?'selected':''; ?>>A Fazer</option>
-        <option value="Fazendo" <?php echo ($task['status']=='Fazendo')?'selected':''; ?>>Fazendo</option>
-        <option value="Pronto" <?php echo ($task['status']=='Pronto')?'selected':''; ?>>Pronto</option>
-      </select>
+            <label>Status</label>
+            <select name="status" required>
+                <option value="A Fazer" <?php echo ($task['status'] == 'A Fazer') ? 'selected' : ''; ?>>A Fazer</option>
+                <option value="Fazendo" <?php echo ($task['status'] == 'Fazendo') ? 'selected' : ''; ?>>Fazendo</option>
+                <option value="Pronto" <?php echo ($task['status'] == 'Pronto') ? 'selected' : ''; ?>>Pronto</option>
+            </select>
 
-      <button type="submit"><?php echo $editMode?'Salvar Alterações':'Cadastrar Tarefa'; ?></button>
-    </form>
-  </div>
+            <button type="submit"><?php echo $editMode ? 'Salvar Alterações' : 'Cadastrar Tarefa'; ?></button>
+        </form>
+    </div>
 </body>
+
 </html>

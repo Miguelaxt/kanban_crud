@@ -3,30 +3,32 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="utf-8">
-  <title>Kanban - Menu</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Industria - Sistema de Tarefas</h1>
-    </header>
-  </div>
-    <nav>
-    <div class ="usuario">
-        <a href="cadastro_usuario.php">Cadastro de Usuários</a>
-    </div>
 
-    <div class ="tarefa">
-        <a href="cadastro_tarefa.php">Cadastro de Tarefas</a>
+<head>
+    <meta charset="utf-8">
+    <title>Kanban - Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Industria - Sistema de Tarefas</h1>
+        </header>
     </div>
-    
-    <div class ="gerenciar">
-        <a href="gerenciar_tarefas.php">Gerenciar Tarefas</a>
-    </div>
+    <nav>
+        <div class="usuario">
+            <a href="cadastro_usuario.php">Cadastro de Usuários</a>
+        </div>
+
+        <div class="tarefa">
+            <a href="cadastro_tarefa.php">Cadastro de Tarefas</a>
+        </div>
+
+        <div class="gerenciar">
+            <a href="gerenciar_tarefas.php">Gerenciar Tarefas</a>
+        </div>
     </nav>
 </body>
-</html>
 
+</html>
