@@ -15,11 +15,18 @@
     </header>
   </div>
     <nav>
-    <div class ="menu">
+    <div class ="usuario">
         <a href="cadastro_usuario.php">Cadastro de Usuários</a>
+    </div>
+
+    <div class ="tarefa">
         <a href="cadastro_tarefa.php">Cadastro de Tarefas</a>
+    </div>
+    
+    <div class ="gerenciar">
         <a href="gerenciar_tarefas.php">Gerenciar Tarefas</a>
     </div>
     </nav>
 </body>
 </html>
+
